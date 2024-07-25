@@ -36,19 +36,9 @@ from metagpt.utils.token_counter import DASHSCOPE_TOKEN_COSTS
 def build_api_arequest(
     model: str, input: object, task_group: str, task: str, function: str, api_key: str, is_service=True, **kwargs
 ):
-    (
-        api_protocol,
-        ws_stream_mode,
-        is_binary_input,
-        http_method,
-        stream,
-        async_request,
-        query,
-        headers,
-        request_timeout,
-        form,
-        resources,
-    ) = _get_protocol_params(kwargs)
+    (api_protocol, ws_stream_mode, is_binary_input, http_method, stream,
+     async_request, query, headers, request_timeout, form, resources,
+     base_address, flattened_output) = _get_protocol_params(kwargs)
     task_id = kwargs.pop("task_id", None)
     if api_protocol in [ApiProtocol.HTTP, ApiProtocol.HTTPS]:
         if not dashscope.base_http_api_url.endswith("/"):
